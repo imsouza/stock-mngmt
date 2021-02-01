@@ -1,6 +1,6 @@
 # Inv Mngmt
 
-An stock management app for academic purposes
+A stock management app for academic purposes
 
 ## Features
 
