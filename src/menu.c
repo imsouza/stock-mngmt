@@ -1,6 +1,7 @@
 #include "main.h"
 
-void selectChoice (int choice, int key) {
+void 
+selectChoice (int choice, int key) {
   if (key == 1) {
     switch (choice) {
       case 1: initialMenu(2); break;
@@ -26,7 +27,8 @@ void selectChoice (int choice, int key) {
 }
 
 
-void initialMenu (int payload) {
+void 
+initialMenu (int payload) {
   switch (payload) {
     case 1: plotInitialMenu(); break;
     case 2: plotStockMenu(); break;

@@ -1,6 +1,7 @@
 #include "main.h"
 
-void putBar () {
+void 
+putBar () {
   for (int i = 0; i < 80; i++) {
     printf(BWHT"="reset);
   }
@@ -8,7 +9,8 @@ void putBar () {
 }
 
 
-int printCenter (char *string) {
+int 
+printCenter (char *string) {
   int width  = 80;
   int length = strlen(string) - 1;
   int padding = (length >= width) ? 0 : (width - length) / 2;

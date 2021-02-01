@@ -29,15 +29,12 @@ An stock management app for academic purposes
   - [x] Check all memory allocations
   - [ ] Check all I/O errors
   - [x] Check for memory leak
-  - [x] Check the machine's storage capacity
   - [x] Check for errors when terminating the program
   - [ ] Check program stability with a massive amount of data
   - [x] Check mathematical inconsistencies
   - [x] Check for logic errors in data structures
   - [x] Check data flow errors
   - [x] Check dangling pointers
-  - [x] Check program limitations
-  - [x] Check program execution time
   - [x] Check for unexpected program crashes
   - [ ] Others
 

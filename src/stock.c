@@ -162,7 +162,7 @@ stockListControl (FILE *savedStockFile, stockData *item_t, int choice, int lines
   switch (choice) {
     case 1: checkItemId(savedStockFile, item_t, lines, 0); break;
     case 2: checkItemId(savedStockFile, item_t, lines, 1); break;
-    case 3: initialMenu(2); break;
+    case 3: freeStockListMemory(savedStockFile, item_t); initialMenu(2); break;
     default: {
       printf("%s", warnings[0]);
       sleep(SECONDS);
@@ -193,7 +193,7 @@ showStockList () {
   }
 
   stockData *item_t;
-  item_t = (void *) malloc(sizeof(item_t));
+  item_t = (void *) malloc(lines * sizeof(stockData));
 
   getStockRegistrationData(savedStockFile, item_t, lines);
 

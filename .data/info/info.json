@@ -3,7 +3,7 @@
   "description"  : "An stock management app for academic purposes",
   "author"       : "Mateus Almeida",
   "license"      : "MIT",
-  "version"      : "x.x.x",
+  "version"      : "1.0",
   "write_in"     : "C",
   "compiler"     : "gcc",
   "OS_support"   : "Linux",
