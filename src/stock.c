@@ -21,7 +21,7 @@ saveStockRegistrationData (stockData *item_t) {
     exit(1);
   }
 
-  fprintf(savedStockFile, "%i %s %i %f\n", 
+  fprintf(savedStockFile, "%i %s %i %.2f\n", 
   item_t->itemId,
   item_t->itemName,
   item_t->itemQty,
@@ -277,11 +277,11 @@ editItemControl (FILE *savedStockFile, stockData *item_t, int index) {
 void 
 editItemInformation (stockData *item_t, int index) {
   plotEditItemHeader();
-  printf(YEL"\n [1] NAME: %s\n [2] QTY: %i\n [3] PRICE (per unit): \
+  printf(YEL" [1] NAME: %s\n [2] QTY: %i\n [3] PRICE (per unit): \
 $%.2f\n\n"reset, 
-  item_t->itemName,
-  item_t->itemQty,
-  item_t->itemPrice);
+  item_t[index].itemName,
+  item_t[index].itemQty,
+  item_t[index].itemPrice);
   putBar();
 
   int choice;
@@ -334,11 +334,11 @@ $%.2f\n\n"reset,
   char newline[BUFFER];
   char buffer[BUFFER];
 
-  fprintf(stockTempFile, "%i %s %i %f\n",
-  item_t->itemId,
-  item_t->itemName,
-  item_t->itemQty,
-  item_t->itemPrice);
+  fprintf(stockTempFile, "%i %s %i %.2f\n",
+  item_t[index].itemId,
+  item_t[index].itemName,
+  item_t[index].itemQty,
+  item_t[index].itemPrice);
 
   fgets(newline, BUFFER, savedStockFile);
 
@@ -411,9 +411,9 @@ deleteItemInformation (stockData *item_t, int index) {
   plotDeleteItemHeader();
   printf(RED"\n [1] Name: %s\n [2] QTY: %i\n [3] PRICE (per unit): \
 $%.2f\n\n"reset, 
-  item_t->itemName,
-  item_t->itemQty,
-  item_t->itemPrice);
+  item_t[index].itemName,
+  item_t[index].itemQty,
+  item_t[index].itemPrice);
   putBar();
 
   FILE *stockTempFile;
