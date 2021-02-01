@@ -15,10 +15,6 @@ An stock management app for academic purposes
 - [Todo](#todo)
 - [License](#license)
 
-## Run
-
-$ make
-
 ## TODO
 
 - Functions
@@ -49,6 +45,9 @@ $ make
   - [x] Custom colors
   - [x] Configure Makefile
 
+## Run
+
+$ make
 
 ## OS Support
 
