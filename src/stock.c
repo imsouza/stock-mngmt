@@ -5,9 +5,10 @@
  ************************************************/
 
 void 
-freeStockRegistrationMemory (stockData *item_t) {
+freeStockListMemory (FILE *savedStockFile, stockData *item_t) {
+  fclose(savedStockFile);
+  savedStockFile = NULL;
   free(item_t);
-  item_t = NULL;
 }
 
 
@@ -27,9 +28,7 @@ saveStockRegistrationData (stockData *item_t) {
   item_t->itemQty,
   item_t->itemPrice);
 
-  fclose(savedStockFile);
-  savedStockFile = NULL;
-  freeStockRegistrationMemory(item_t);
+  freeStockListMemory(savedStockFile, item_t);
 }
 
 
@@ -47,12 +46,13 @@ stockRegistryControl (stockData *item_t) {
       saveStockRegistrationData(item_t);
       printf("%s", warnings[2]);
       sleep(SECONDS);
+      free(item_t);
       initialMenu(2); 
       break;
     }
     case 'N':
     case 'n': {
-      freeStockRegistrationMemory(item_t);
+      free(item_t);
       initialMenu(2);
       break;
     }
@@ -109,14 +109,6 @@ registerItem () {
  * Show Stock List                             *
  ************************************************/
 
-void 
-freeStockListMemory (FILE *savedStockFile, stockData *item_t) {
-  fclose(savedStockFile);
-  savedStockFile = NULL;
-  freeStockRegistrationMemory(item_t);
-}
-
-
 int 
 checkNumberOfLines () {
   FILE *savedStockFile;
@@ -160,9 +152,19 @@ getStockRegistrationData (FILE *savedStockFile, stockData *item_t, int lines) {
 void 
 stockListControl (FILE *savedStockFile, stockData *item_t, int choice, int lines) {
   switch (choice) {
-    case 1: checkItemId(savedStockFile, item_t, lines, 0); break;
-    case 2: checkItemId(savedStockFile, item_t, lines, 1); break;
-    case 3: freeStockListMemory(savedStockFile, item_t); initialMenu(2); break;
+    case 1: {
+      checkItemId(savedStockFile, item_t, lines, 0); 
+      break;
+    }
+    case 2: {
+      checkItemId(savedStockFile, item_t, lines, 1); 
+      break;
+    }
+    case 3: {
+      freeStockListMemory(savedStockFile, item_t); 
+      initialMenu(2); 
+      break;
+    }
     default: {
       printf("%s", warnings[0]);
       sleep(SECONDS);
@@ -246,7 +248,7 @@ searchItemId (stockData *item_t, int itemId, int infLim, int supLim) {
 
 
 void 
-editItemControl (FILE *savedStockFile, stockData *item_t, int index) {
+editItemControl (stockData *item_t, int index) {
   char choice;
   printf("%s", warnings[7]);
   setbuf(stdin, NULL);
@@ -260,6 +262,7 @@ editItemControl (FILE *savedStockFile, stockData *item_t, int index) {
     }
     case 'N':
     case 'n': {
+      free(item_t);
       showStockList();
       break;
     }
@@ -267,7 +270,7 @@ editItemControl (FILE *savedStockFile, stockData *item_t, int index) {
       printf("%s", warnings[0]);
       sleep(SECONDS);
       getchar();
-      return editItemControl(savedStockFile, item_t, index);
+      return editItemControl(item_t, index);
       break;
     }
   }
@@ -361,13 +364,15 @@ $%.2f\n\n"reset,
   printf("%s", warnings[10]);
   getchar();
 
-  freeStockListMemory(stockTempFile, item_t);
+  fclose(stockTempFile);
   fclose(savedStockFile);
   savedStockFile = NULL;
+  stockTempFile = NULL;
 
   remove(STOCK_REGISTRATION_DATA);
   rename(STOCK_REGISTRATION_DATA_TMP, STOCK_REGISTRATION_DATA);
 
+  free(item_t);
   getchar();
   initialMenu(2);
 }
@@ -378,7 +383,7 @@ $%.2f\n\n"reset,
  ************************************************/
 
 void 
-deleteItemControl (FILE *savedStockFile, stockData *item_t, int index) {
+deleteItemControl (stockData *item_t, int index) {
   char choice;
   printf("%s", warnings[11]);
   setbuf(stdin, NULL);
@@ -392,6 +397,7 @@ deleteItemControl (FILE *savedStockFile, stockData *item_t, int index) {
     }
     case 'N':
     case 'n': {
+      free(item_t);
       showStockList();
       break;
     }
@@ -399,7 +405,7 @@ deleteItemControl (FILE *savedStockFile, stockData *item_t, int index) {
       printf("%s", warnings[0]);
       sleep(SECONDS);
       getchar();
-      return deleteItemControl(savedStockFile, item_t, index);
+      return deleteItemControl(item_t, index);
       break;
     }
   }
@@ -445,13 +451,15 @@ $%.2f\n\n"reset,
   printf("%s", warnings[10]);
   getchar();
 
-  freeStockListMemory(stockTempFile, item_t);
+  fclose(stockTempFile);
   fclose(savedStockFile);
   savedStockFile = NULL;
+  stockTempFile = NULL;
 
   remove(STOCK_REGISTRATION_DATA);
   rename(STOCK_REGISTRATION_DATA_TMP, STOCK_REGISTRATION_DATA);
 
+  free(item_t);
   getchar();
   initialMenu(2);
 }
@@ -480,9 +488,11 @@ checkItemId (FILE *savedStockFile, stockData *item_t, int lines, int flag) {
     printf("%s", warnings[6]);
     sleep(SECONDS);
     if (flag == 0) {
-      editItemControl(savedStockFile, item_t, index);
+      fclose(savedStockFile);
+      editItemControl(item_t, index);
     } else {
-      deleteItemControl(savedStockFile, item_t, index);
+      fclose(savedStockFile);
+      deleteItemControl(item_t, index);
     }
   }
 }
