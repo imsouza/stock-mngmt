@@ -5,6 +5,7 @@ PROJECT = main.o
 #H_SOURCE = $(wildcard ./src/*.h)
 
 # Directories
+DIR_OUT = obj
 DIR_SRC += .
 DIR_SRC = ./src
 DIR_INC += $(addprefix -I, $(DIR_SRC))
@@ -29,16 +30,17 @@ CC = gcc
  
 # Command used at clean target
 RM = rm -rf
- 
+MD = $(shell mkdir -p $(DIR_OUT))
+
 #
 # Compilation and linking
 #
 .PHONY:all
 
 all:$(OBJ) $(EXE)
-
 %.o: %.c
 	@ echo 'Building target using GCC compiler:$@'
+	$(MD)
 	$(CC) $(DIR_INC) -c $< -o $@
 	@ echo ' '
 
@@ -53,7 +55,6 @@ $(EXE): $(OBJ)
 	@ echo 'Done!'
 	@ echo ' '
 
-	printf "\033c"
 	sh run.sh
 
 clean:

@@ -1,4 +1,5 @@
 #!/bin/bash
+sleep 1.5
 printf "\033c"
 count=0
 total=8
