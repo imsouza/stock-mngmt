@@ -46,7 +46,6 @@ stockRegistryControl (stockData *item_t) {
       saveStockRegistrationData(item_t);
       printf("%s", warnings[2]);
       sleep(SECONDS);
-      free(item_t);
       initialMenu(2); 
       break;
     }
