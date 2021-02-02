@@ -92,7 +92,12 @@ inputItemRegistrationData (stockData *item_t) {
 void 
 registerItem () {
   stockData *item_t;
-  item_t = (void *) malloc(sizeof(struct stockStruct));
+  item_t = (struct stockStruct *) malloc(sizeof(struct stockStruct));
+
+  if (item_t == NULL) {
+    perror(warnings[1]);
+    exit(1);
+  }
 
   plotRegisterItemHeader();
 
@@ -194,7 +199,12 @@ showStockList () {
   }
 
   stockData *item_t;
-  item_t = (void *) malloc(lines * sizeof(stockData));
+  item_t = (struct stockStruct *) malloc(BUFFER * sizeof(struct stockStruct));
+
+  if (item_t == NULL) {
+    perror(warnings[1]);
+    exit(1);
+  }
 
   getStockRegistrationData(savedStockFile, item_t, lines);
 
@@ -294,13 +304,13 @@ $%.2f\n\n"reset,
   FILE *stockTempFile;
   FILE *savedStockFile;
 
+  savedStockFile = fopen(STOCK_REGISTRATION_DATA, "r");
+  stockTempFile = fopen(STOCK_REGISTRATION_DATA_TMP, "w");
+
   if (savedStockFile == NULL || stockTempFile == NULL) {
     perror(warnings[1]);
     exit(1);
   }
-
-  savedStockFile = fopen(STOCK_REGISTRATION_DATA, "r");
-  stockTempFile = fopen(STOCK_REGISTRATION_DATA_TMP, "w");
 
   switch(choice) {
     case 1: {
@@ -424,13 +434,13 @@ $%.2f\n\n"reset,
   FILE *stockTempFile;
   FILE *savedStockFile;
 
+  savedStockFile = fopen(STOCK_REGISTRATION_DATA, "r");
+  stockTempFile = fopen(STOCK_REGISTRATION_DATA_TMP, "w");
+
   if (savedStockFile == NULL || stockTempFile == NULL) {
     perror(warnings[1]);
     exit(1);
   }
-
-  savedStockFile = fopen(STOCK_REGISTRATION_DATA, "r");
-  stockTempFile = fopen(STOCK_REGISTRATION_DATA_TMP, "w");
 
   char buffer[BUFFER];
   char string[BUFFER];
