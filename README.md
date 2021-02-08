@@ -20,6 +20,10 @@ A stock management app for academic purposes
 - Functions
   - [x] Menu
   - [x] Stock control
+  	- [x] Add item
+  	- [x] Edit item
+  	- [x] Delete item
+  	- [x] Search item
   - [x] Exit
 
 - Tests
@@ -40,6 +44,7 @@ A stock management app for academic purposes
 
 - Extra
   - [x] Custom colors
+  - [x] Error handling
   - [x] Configure Makefile
 
 ## Run
