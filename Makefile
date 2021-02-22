@@ -23,11 +23,17 @@ EXE := obj/$(PROJECT)
 CC = gcc
  
 # Flags for compiler
-#CC_FLAGS = -c         \
-#					 -Wall       \
-#					 -ansi       \
-#					 -pedantic
- 
+CC_FLAGS = 	 -c		\
+		 -Wall		\
+		 -lm 		\
+		 -O0		\
+		 -std=c11	\
+		 -Wextra	\
+		 -Wno-sign-compare		\
+		 -Wno-unused-parameter		\
+		 -Wno-unused-variable		\
+		 -Wshadow
+		 
 # Command used at clean target
 RM = rm -rf
 MD = $(shell mkdir -p $(DIR_OUT))
@@ -41,7 +47,7 @@ all:$(OBJ) $(EXE)
 %.o: %.c
 	@ echo 'Building target using GCC compiler:$@'
 	$(MD)
-	$(CC) $(DIR_INC) -c $< -o $@
+	$(CC) $(DIR_INC) $(CC_FLAGS) $< -o $@
 	@ echo ' '
 
 $(EXE): $(OBJ)

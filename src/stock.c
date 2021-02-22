@@ -230,6 +230,14 @@ PRICE (per unit): $%.2f\n\n"reset,
  ************************************************/
 
 int 
+comparator (const void *x, const void *y) {
+  int first  = ((struct stockStruct *) x)->itemId;
+  int second = ((struct stockStruct *) y)->itemId;
+  return (first - second);
+}
+
+
+int 
 searchItemId (stockData *item_t, int itemId, int infLim, int supLim) {
   int middle;
   if (infLim > supLim) {
@@ -486,6 +494,8 @@ checkItemId (FILE *savedStockFile, stockData *item_t, int lines, int flag) {
   printf(BWHT"\n[+] Enter the item ID: "reset);
   setbuf(stdin, NULL);
   scanf("%i", &itemId);
+
+  qsort(item_t, lines - 1, sizeof(struct stockStruct), comparator);
 
   int index = searchItemId(item_t, itemId, 0, lines);
 
