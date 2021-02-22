@@ -110,7 +110,7 @@ registerItem () {
 
 
 /************************************************
- * Show Stock List                             *
+ * Show Stock List                              *
  ************************************************/
 
 int 
@@ -495,14 +495,16 @@ checkItemId (FILE *savedStockFile, stockData *item_t, int lines, int flag) {
   setbuf(stdin, NULL);
   scanf("%i", &itemId);
 
-  qsort(item_t, lines - 1, sizeof(struct stockStruct), comparator);
+  qsort(item_t, lines+1, sizeof(struct stockStruct), comparator);
 
   int index = searchItemId(item_t, itemId, 0, lines);
 
   if (index == -1) {
     printf("%s", warnings[5]);
     sleep(SECONDS);
-    return checkItemId(savedStockFile, item_t, lines, flag);
+    fclose(savedStockFile);
+    free(item_t);
+    showStockList();
   } else {
     printf("%s", warnings[6]);
     sleep(SECONDS);
