@@ -29,7 +29,6 @@ A stock management app for academic purposes
 - Tests
   - [x] Check logic erros
   - [x] Check that the spelling is correct
-  - [x] Check for errors when handling the files
   - [x] Check all memory allocations
   - [ ] Check all I/O errors
   - [x] Check for memory leak
