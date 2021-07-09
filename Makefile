@@ -1,28 +1,19 @@
-# Name of the project
-PROJECT = main.o
- 
-# .h files
+PROJECT = stock
 #H_SOURCE = $(wildcard ./src/*.h)
 
-# Directories
 DIR_OUT = obj
 DIR_SRC += .
 DIR_SRC = ./src
 DIR_INC += $(addprefix -I, $(DIR_SRC))
 
-# .c files
 C_SOURCE += $(wildcard $(addsuffix /*.c, $(DIR_SRC)))
 
-# Object files
 OBJ := $(patsubst %.c, %.o, $(C_SOURCE))
+ 
+CC = gcc
 
-# Executable
 EXE := obj/$(PROJECT)
  
-# Compiler and linker
-CC = gcc
- 
-# Flags for compiler
 CC_FLAGS = 	 -c		\
 		 -Wall		\
 		 -lm 		\
@@ -34,13 +25,9 @@ CC_FLAGS = 	 -c		\
 		 -Wno-unused-variable		\
 		 -Wshadow
 		 
-# Command used at clean target
 RM = rm -rf
 MD = $(shell mkdir -p $(DIR_OUT))
 
-#
-# Compilation and linking
-#
 .PHONY:all
 
 all:$(OBJ) $(EXE)
@@ -61,7 +48,11 @@ $(EXE): $(OBJ)
 	@ echo 'Done!'
 	@ echo ' '
 
-	sh run.sh
-
 clean:
-	rm -r *.o
+	cd obj && $(RM) $(PROJECT)
+
+memcheck: $(EXE)
+	make && cd obj && valgrind --tool=memcheck --leak-check=full -s ./$(PROJECT)
+
+run: $(EXE)
+	cd obj && ./${PROJECT}

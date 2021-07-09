@@ -9,12 +9,6 @@ A stock management app for academic purposes
 - List items
 - Remove items
 
-## Table of contents
-
-- [Run](#run)
-- [Todo](#todo)
-- [License](#license)
-
 ## TODO
 
 - Functions
