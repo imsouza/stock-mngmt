@@ -1,4 +1,4 @@
-# Inv Mngmt
+# Stock Mngmt
 
 A stock management app for academic purposes
 
@@ -43,7 +43,9 @@ A stock management app for academic purposes
 
 ## Run
 
+```
 $ make && make run
+```
 
 ## OS Support
 

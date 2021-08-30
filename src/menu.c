@@ -1,4 +1,4 @@
-#include "main.h"
+#include "util.h"
 
 void 
 selectChoice (int choice, int key) {
