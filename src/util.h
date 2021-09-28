@@ -1,25 +1,20 @@
 #ifndef UTIL_H_
 #define UTIL_H_
-  #include <stdio.h>
-  #include <stdlib.h>
-  #include <string.h>
-  #include <ctype.h>
-  #include <time.h>
-  #include <sys/time.h>
-  #include <unistd.h>
-  #include <math.h>
   #include "../lib/colors.h"
 
   #define PAYLOAD 1
   #define SECONDS 1.8
-  #define FALSE 0
-  #define TRUE 1
   #define BUFFER 1000
 
   #define STOCK_REGISTRATION_DATA \
   "../.data/storage/stock_registration_data.csv"
   #define STOCK_REGISTRATION_DATA_TMP \
   "../.data/storage/stock_registration_data_temp.csv"
+
+  typedef enum {
+    false,
+    true
+  } bool;
 
   int main();
   void initialMenu();
